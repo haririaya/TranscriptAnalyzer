@@ -1,0 +1,75 @@
+.mat-toolbar-row, .mat-toolbar-single-row.headerToolbar {
+	background-color: #5A5A72!important;
+	height: 60px;
+}
+.mat-toolbar, .mat-toolbar h1, .mat-toolbar h2, .mat-toolbar h3, .mat-toolbar h4, .mat-toolbar h5, .mat-toolbar h6 {
+
+    font: 100%/150% calibri,helvetica,sans-serif;
+}
+.notSelectedBody {
+    background-image: url(/assets/Empty.jpg)!important;
+    background-repeat: no-repeat;
+    background-size: 120vh 70vh;
+    background-position: center;
+}
+
+.white { 
+ color: white; 
+}
+.grey{
+    color: grey;
+}
+.placehold{
+    color: grey;
+}
+
+.mt-75{
+    margin-top: 75vh;
+}
+.image{
+	height: 25px;
+    width: 25px;
+    border-radius: 13px;
+    position: absolute;
+    right: 12px;
+}
+.myPanelClass{
+    margin-top: 30px !important; 
+}
+::ng-deep .cdk-overlay-container{
+    position: fixed;
+    top: 94px;
+    border-radius: 5px;
+    border: 2px solid #EFEFF1
+}
+::ng-deep .thirdSelect {
+    width:300px!important;
+}
+
+::ng-deep .mat-slider-thumb{
+    background-color: black!important;
+}
+::ng-deep .mat-slider-track-fill{
+    background-color: black!important;
+}
+
+
+.slider{
+    width: 80%!important;
+}
+
+
+.mat-toolbar-row, .mat-toolbar-single-row.greybg {
+    background-color: #EFEFF1;
+    height: 45px;
+}
+.mat-select {
+    display: contents !important;
+}
+.mat-select-arrow-wrapper {
+    display: inline-table!important;
+}
+::ng-deep  .mat-form-field-underline {
+        background-color: black;
+        color: black;
+    }

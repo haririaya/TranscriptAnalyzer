@@ -1,0 +1,94 @@
+ <body [ngClass] = "{'notSelectedBody': notSelected == true}">
+  <!-- Header -->
+  <mat-toolbar class = "headerToolbar" >
+    <span class="white" > TRANSCRIPT ANALYZER 	</span>
+    <img class= "image" src=" ../assets/pic.jpeg">
+  </mat-toolbar>
+
+  <!-- Select dropdowns + slider -->
+<mat-toolbar class="greybg">
+	<div class = "position-absolute">
+
+    <!-- first dropdown -->
+	<mat-form-field class = "ml-3 wd">
+		<span matPrefix style="margin-right: 8px;"><mat-icon><i class="fas fa-user-friends circle" [ngClass] = "{'grey': !selectedAgent && selectedAgent !== 0}"></i> </mat-icon></span>
+    <mat-label *ngIf= "!selectedAgent && selectedAgent !== 0" class= "placehold " > Agent </mat-label>
+    <mat-select [(ngModel)]="selectedAgent" name="agent.full_name" disableOptionCentering panelClass="myPanelClass" (selectionChange) = "getCalls()" >
+      <mat-option *ngFor="let agent of agents; let index = index" [value]="index">
+        {{agent.full_name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- second dropwdown -->
+   <mat-form-field class = "ml-3">
+   	<span matPrefix style="margin-right: 8px;"><mat-icon><i class="fas fa-grip-lines"[ngClass] = "{'grey': !callType}"></i> </mat-icon></span>
+    <mat-label *ngIf= "!callType" class= "placehold"> Any </mat-label>
+    <mat-select [(ngModel)]="callType" name="callType" disableOptionCentering panelClass="myPanelClass" (selectionChange) = "getCalls()" >
+    	<mat-option  [value] = "'all'"> All </mat-option>
+      <mat-option *ngFor="let calltype of callTypes; let index = index" [value]="calltype.calltype_id">
+        {{calltype.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- third dropdown -->
+  <mat-form-field class = "ml-3 thirdSelect">
+  	   	<span matPrefix style="margin-right: 8px;"><mat-icon><i class="fas fa-phone-alt" [ngClass] = "{'grey': !selectedCall}"></i></mat-icon></span>
+    <mat-label *ngIf = "!selectedCall" class= "placehold " > Call </mat-label>
+    <mat-select [(ngModel)]="selectedCall" name="call" disableOptionCentering panelClass="myPanelClass" (selectionChange) = "logCall()" [disabled] = "calls == []">
+      <mat-option *ngFor="let call of calls; let index = index" [value]="call.call_id">
+        {{call.call_start_time.substr(0, 10)}} - {{call.customer[0].full_name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class= "d-inline-block col-" *ngIf= "!notSelected">
+  <span class = "ml-5">MATCHING SENSITIVITY </span>
+  	<mat-slider 
+  	class= "slider"
+  	[value] = "sliderValue"
+  	(change) = "valueChange($event)"
+  min="0"
+  max="100"></mat-slider>
+<span> {{sliderValue}} %</span>
+</div>
+  </div>
+
+</mat-toolbar>
+
+<!-- Slider to be displayed in case of selection of call and default value 38% -->
+<div  *ngIf = " notSelected" class = "text-center mt-75">
+  <h1> Selection Pending </h1>
+  <div> Select a call from the top menu and a transcript analysis will be shown here </div>
+</div>
+</body>
+
+<!-- Display tables called when call selection has been made -->
+<div *ngIf= "!notSelected" class = "container-fluid"> 
+	<div class = "row">
+    <app-display-table class = "col-6 d-inline mt-5" [title] = "'Real'"
+                                                     [head1] = "'Time'"
+                                                     [head2]= "'Speaker'"
+                                                     [head3] = "'Sentence'"
+                                                     [keys]= "['timeFrom', 'channel', 'sentence']"
+                                                     [similarity] = "sliderValue/100"
+                                                     (darkHighlight) = "logEmitter($event)"
+                                                     [allowHover] = "true"
+                                                     [order] = "number"
+                                                     [agentName] = "this.agents[this.selectedAgent]['full_name']"
+                                                     [percentage] = "percentage"
+                                                     [data] = "transcript"></app-display-table>
+		<app-display-table class = "col-6 d-inline mt-5" [title] = "'Expectation'"
+                                                     [head1] = "'Line'"
+                                                     [head2]= "'Speaker'"
+                                                     [head3] = "'Sentence'"
+                                                     [placeholder2] = "'Rep'"
+                                                     [data] = "script"
+                                                     [allowHover] = "False"
+                                                     [similarity] = "sliderValue/100"
+                                                     [darkLink] = "linkSentence"
+                                                     [percentage] = "100"
+                                                     [keys] = "['order', '', 'sentence']"></app-display-table>
+		
+	</div>
+ </div>

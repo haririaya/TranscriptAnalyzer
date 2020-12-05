@@ -1,0 +1,81 @@
+.greybg{
+	background-color: #EFEFF1;
+    height: 45px;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px;
+}
+.circle {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  float: right; 
+}
+.circle.full {
+    background-color: #5A5A72;
+}
+.circle.half{
+    background-image:linear-gradient(to right, transparent 50%, #5A5A72 0)
+} 
+.circle.quarter{
+    background: conic-gradient(#5A5A72 25%, #bbb 0);
+} 
+
+.circle.mid2{
+    background: conic-gradient(#5A5A72 40%, #bbb 0);
+} 
+.circle.mid3{
+    background: conic-gradient(#5A5A72 60%, #bbb 0);
+} 
+.circle.mid4{
+    background: conic-gradient(#5A5A72 60%, #bbb 0);
+} 
+.circle.threequarter{
+    background: conic-gradient(#5A5A72 75%, #bbb 0);
+
+}
+
+.bordered{
+border: 2.5px solid #EFEFFF;
+    border-radius: 8px;
+}
+tbody tr:not(:first-child){
+    border-top: hidden;
+}
+.lightHighlight {
+
+background: lightgrey;
+
+
+background-clip: content-box;
+}
+.tableWrapper {
+	height: 500px;
+	overflow: auto;
+}
+
+.lightHighlight.hoverTable:hover {
+    background-color: #BDBDC6 !important;
+    background-clip: content-box;   
+}
+.darkHighlight  {
+	background-color: #BDBDC6 !important;
+	background-clip: content-box;
+}
+.hoverTable:hover span.CellComment{
+  display:block;
+}
+.CellComment {
+display:none;
+    z-index: 100;
+    border: 1px;
+    background-color: #7F7F7F;
+    border-style: solid;
+    border-width: 1px;
+    padding: 3px;
+    opacity: 0.8;
+    border-radius: 6px;
+    color: white;
+}

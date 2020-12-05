@@ -1,0 +1,44 @@
+<div class = "bordered">
+<div class ="greybg"> {{title}} <span class = "circle" [ngClass] = "{'full' : percentage == 100, 
+'half' : percentage > 45 && percentage < 55, 
+'quarter' : percentage > 20 && percentage < 30,
+'threequarter': percentage > 60 && percentage <80,
+'mid1': percentage > 0 && percentage <= 25, 
+'mid2': percentage >= 30 && percentage <=45,
+'mid3': percentage >= 55 && percentage <= 60,
+'mid4': percentage >= 80 && percentage <100 }"> 
+   </span> <span class = "float-right mr-1">{{percentage}} %</span></div>
+<div class = "tableWrapper">
+<table class="table tableBorder">
+  <thead>
+  <tr>
+    <th scope="col">{{head1}}</th>
+    <th scope="col">{{head2}}</th>
+    <th scope="col">{{head3}}</th>
+  </tr>
+  </thead>
+  <tbody>
+
+
+  <tr *ngFor= "let row of data">
+    <td *ngIf = "keys[0] && keys[0]!== ''">{{row[keys[0]]}}</td>
+    <td *ngIf = "!keys[0] || keys[0] === ' ' ">{{placeholder1}}</td>
+
+    <td *ngIf = "keys[1] && keys[1]!== ''">{{row[keys[1]]}}</td>
+    <td *ngIf = "!keys[1] || keys[1] === ' ' ">{{placeholder2}}</td>
+    
+    <td *ngIf = "keys[2] && keys[2]!== ''" 
+    (mouseover)="mouseOver(row['matching_sentence'])"
+    [ngClass]= "{'lightHighlight' : row['similarity']>= similarity && (row['channel'] == agentName || row['channel'] == 'Unknown') , 'darkHighlight': darkLink == row[keys[2]], 'hoverTable': row['matching_sentence'] &&allowHover }"   > 
+    	<span *ngIf = "row['matching_sentence'] &&allowHover " class="CellComment">{{row['similarity']*100}} % matching with line # {{order}} "  {{row['matching_sentence']}} "</span>
+    	
+    	{{row[keys[2]]}} 
+
+    </td>
+    <td *ngIf = "!keys[2] || keys[2] === ' ' ">{{placeholder3}}</td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+</div>
